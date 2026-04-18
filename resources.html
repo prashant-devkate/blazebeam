@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources | Blaze-Beam Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Premium Corporate Palette */
+      --brand-orange: #E65C2B;
+      --brand-orange-hover: #CC4E20;
+      --navy-dark: #0B132B;
+      --navy-medium: #1C2541;
+      --slate-gray: #3A506B;
+      --light-bg: #F8F9FA;
+      --white: #FFFFFF;
+      --text-main: #2D3142;
+      --text-muted: #5C6B7A;
+      --border-color: #E2E8F0;
+      
+      /* Subtle Shadows */
+      --shadow-sm: 0 4px 6px -1px rgba(11, 19, 43, 0.05), 0 2px 4px -1px rgba(11, 19, 43, 0.03);
+      --shadow-md: 0 10px 30px -5px rgba(11, 19, 43, 0.08);
+      --shadow-lg: 0 20px 40px -10px rgba(11, 19, 43, 0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6, .brand-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* -- NAV -- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--brand-orange);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 18px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .nav-logo .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--navy-dark);
+      line-height: 1;
+    }
+    .nav-logo .logo-text span { color: var(--brand-orange); }
+    .nav-logo .logo-sub {
+      font-size: 10px; color: var(--slate-gray);
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 4px; font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--brand-orange); }
+    
+    .nav-links .cta-link a {
+      background: var(--brand-orange);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-links .cta-link a:hover { 
+      background: var(--brand-orange-hover); 
+      transform: translateY(-1px);
+      color: white;
+    }
+
+    /* -- PAGE HERO -- */
+    .page-hero {
+      padding: 160px 5% 100px;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.05;
+      background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-hero-content { position: relative; z-index: 2; }
+    .breadcrumb { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--brand-orange); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--white); }
+    .page-hero h1 { font-size: clamp(40px, 6vw, 64px); color: var(--white); line-height: 1.1; font-weight: 700; }
+    .page-hero h1 span { color: var(--brand-orange); }
+    .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 650px; line-height: 1.6; margin-top: 20px; }
+
+    /* -- GENERAL SECTIONS -- */
+    section { padding: 100px 5%; }
+    .section-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-orange); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--brand-orange); }
+    .section-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--navy-dark); line-height: 1.2; margin-bottom: 40px; }
+    .section-title.light { color: var(--white); }
+
+    /* -- CAPABILITIES TABLE -- */
+    .table-container {
+      width: 100%; overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+    .cap-table { width: 100%; border-collapse: collapse; background: var(--white); min-width: 700px; }
+    .cap-table thead tr { background: var(--light-bg); border-bottom: 2px solid var(--border-color); }
+    .cap-table thead th { 
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; 
+      letter-spacing: 1px; text-transform: uppercase; color: var(--slate-gray); 
+      padding: 20px 24px; text-align: left;
+    }
+    .cap-table tbody tr { border-bottom: 1px solid var(--border-color); transition: background 0.2s; }
+    .cap-table tbody tr:hover { background: #F8FAFC; }
+    .cap-table td { padding: 20px 24px; font-size: 15px; color: var(--text-muted); }
+    .cap-table td:first-child { font-weight: 600; color: var(--navy-dark); }
+    
+    .cap-badge { 
+      display: inline-flex; align-items: center;
+      background: rgba(230, 92, 43, 0.1); color: var(--brand-orange); 
+      font-size: 12px; font-weight: 600; letter-spacing: 1px; 
+      text-transform: uppercase; padding: 6px 12px; border-radius: 4px; 
+    }
+
+    /* -- QUALITY SECTION -- */
+    .quality-section { background: var(--navy-dark); color: var(--white); }
+    .quality-section .section-label { color: var(--brand-orange); }
+    .quality-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 48px; }
+    
+    .qual-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 48px 40px; transition: all 0.3s ease;
+    }
+    .qual-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.05); border-color: rgba(230, 92, 43, 0.5); }
+    
+    .q-icon {
+      width: 56px; height: 56px; margin-bottom: 24px;
+      background: rgba(230, 92, 43, 0.15); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--brand-orange);
+    }
+    .q-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    
+    .qual-card h3 { font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 16px; }
+    .qual-card p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+    /* -- INFRASTRUCTURE -- */
+    .infra-section { background: var(--light-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .infra-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .infra-item { 
+      display: flex; gap: 20px; align-items: flex-start; padding: 32px; 
+      background: var(--white); border-radius: 8px;
+      border-left: 4px solid var(--brand-orange); box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s;
+    }
+    .infra-item:hover { box-shadow: var(--shadow-md); }
+    .infra-item .i-num { font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 700; color: rgba(230, 92, 43, 0.2); line-height: 1; }
+    .infra-item h4 { font-size: 18px; font-weight: 600; color: var(--navy-dark); margin-bottom: 8px; }
+    .infra-item p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* -- FAQS -- */
+    .faq-list { display: flex; flex-direction: column; gap: 16px; max-width: 900px; }
+    .faq-item { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: box-shadow 0.3s; }
+    .faq-item:hover { box-shadow: var(--shadow-sm); }
+    
+    .faq-q { 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding: 24px 32px; cursor: pointer; font-family: 'Outfit', sans-serif; 
+      font-size: 18px; font-weight: 600; color: var(--navy-dark); transition: color 0.3s;
+    }
+    .faq-q:hover { color: var(--brand-orange); }
+    .faq-q .arrow { 
+      color: var(--brand-orange); transition: transform 0.3s ease; 
+      width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none;
+    }
+    .faq-a { 
+      padding: 0 32px 32px; font-size: 15px; color: var(--text-muted); 
+      line-height: 1.7; display: none; border-top: 1px solid transparent;
+    }
+    
+    .faq-item.open { border-color: var(--brand-orange); box-shadow: var(--shadow-sm); }
+    .faq-item.open .faq-q { color: var(--brand-orange); border-bottom-color: var(--border-color); }
+    .faq-item.open .faq-a { display: block; border-top-color: var(--border-color); padding-top: 24px; }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+
+    /* -- CTA BANNER -- */
+    .cta-banner { background: var(--brand-orange); padding: 80px 5%; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; position: relative; overflow: hidden; }
+    .cta-banner h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: white; margin-bottom: 8px; }
+    .cta-banner p { color: rgba(255,255,255,0.9); font-size: 18px; position: relative; z-index: 1; }
+    .btn-white { background: white; color: var(--brand-orange); padding: 16px 36px; border-radius: 4px; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; display: inline-block; position: relative; z-index: 1; transition: all 0.3s ease; box-shadow: var(--shadow-sm); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    /* -- FOOTER -- */
+    footer { background: #070B19; padding: 80px 5% 40px; color: rgba(255,255,255,0.7); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand .logo-text { font-size: 24px; font-weight: 700; color: white; margin-bottom: 16px; }
+    .footer-brand .logo-text span { color: var(--brand-orange); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 320px; }
+    .footer-brand .tagline { margin-top: 24px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-orange); }
+    footer h4 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 24px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 12px; }
+    footer ul li a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer ul li a:hover { color: var(--brand-orange); }
+    .footer-contact li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; margin-bottom: 16px; }
+    .footer-contact li svg { width: 18px; height: 18px; stroke: var(--brand-orange); stroke-width: 2; fill: none; flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom { padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 13px; }
+    .footer-bottom a { color: var(--brand-orange); text-decoration: none; }
+
+    /* -- MOBILE RESPONSIVENESS -- */
+    @media (max-width: 1024px) {
+      .quality-grid { grid-template-columns: 1fr; gap: 24px; }
+      .infra-list { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">BB</div>
+    <div>
+      <div class="logo-text">BLAZE<span>-BEAM</span></div>
+      <div class="logo-sub">Technology Pvt. Ltd.</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="applications.html">Applications</a></li>
+    <li><a href="resources.html" class="active">Resources</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li class="cta-link"><a href="contact.html#quote">Request Quote</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Resources</div>
+    <h1>RESOURCES &amp;<br><span>CAPABILITIES</span></h1>
+    <p>Technical specifications, quality standards, facility details, and FAQs to help you make an informed decision about partnering with Blaze-Beam.</p>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Technical Data</div>
+  <h2 class="section-title">Capabilities &amp;<br>Specifications</h2>
+  <div class="table-container">
+    <table class="cap-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Equipment</th>
+          <th>Specification</th>
+          <th>Standard</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Laser Cutting</td><td>HSG Fiber Laser</td><td>Double pallet, high-speed, complex geometries</td><td><span class="cap-badge">In-House</span></td></tr>
+        <tr><td>Bending &amp; Forming</td><td>Hydraulic Press Brake</td><td>200-ton capacity, large-scale components</td><td><span class="cap-badge">In-House</span></td></tr>
+        <tr><td>MIG Welding</td><td>8 Welding Bays</td><td>All material grades, structural &amp; vessels</td><td><span class="cap-badge">ASME/AWS</span></td></tr>
+        <tr><td>TIG Welding</td><td>Certified Equipment</td><td>SS, MS, Aluminium &amp; exotic alloys</td><td><span class="cap-badge">ASME/AWS</span></td></tr>
+        <tr><td>CNC Machining</td><td>CNC Machines</td><td>Tight-tolerance machining for critical parts</td><td><span class="cap-badge">ISO</span></td></tr>
+        <tr><td>Assembly &amp; Fitting</td><td>Assembly Bay</td><td>Full mechanical assembly, up to 6+ tons</td><td><span class="cap-badge">In-House</span></td></tr>
+        <tr><td>NDT Testing</td><td>Testing Instruments</td><td>Non-destructive testing, dimensional</td><td><span class="cap-badge">ISO</span></td></tr>
+        <tr><td>Pressure Testing</td><td>Hydro-test Setup</td><td>Vessels, tanks &amp; piping systems</td><td><span class="cap-badge">ASME</span></td></tr>
+        <tr><td>Material Handling</td><td>Overhead Crane</td><td>Heavy component lifting &amp; movement</td><td><span class="cap-badge">In-House</span></td></tr>
+        <tr><td>Design &amp; Engineering</td><td>CAD/CAM Office</td><td>3D modelling, structural analysis, drawings</td><td><span class="cap-badge">ISO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="quality-section">
+  <div class="section-label">Standards &amp; Compliance</div>
+  <h2 class="section-title light">Quality &amp;<br>Standards</h2>
+  <div class="quality-grid">
+    <div class="qual-card">
+      <div class="q-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+      </div>
+      <h3>ISO Compliant Processes</h3>
+      <p>All manufacturing processes follow international quality management standards. From raw material procurement through to final delivery, every stage is documented and traceable.</p>
+    </div>
+    <div class="qual-card">
+      <div class="q-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <h3>Material Traceability</h3>
+      <p>Full documentation and traceability of raw materials from procurement to final product. Every batch comes with material test certificates and inspection records.</p>
+    </div>
+    <div class="qual-card">
+      <div class="q-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+      </div>
+      <h3>In-Process Inspections</h3>
+      <p>Stage-wise quality checks at every critical point during fabrication and assembly. Our quality inspection area is equipped with precision instruments for dimensional verification.</p>
+    </div>
+    <div class="qual-card">
+      <div class="q-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+      </div>
+      <h3>Certified Welders</h3>
+      <p>All 8 welders are certified per ASME/AWS standards for structural and pressure vessel work — providing confidence in every weld, every time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="infra-section">
+  <div class="section-label">Facility</div>
+  <h2 class="section-title">Infrastructure &amp;<br>Facility</h2>
+  <div class="infra-list">
+    <div class="infra-item"><div class="i-num">01</div><div><h4>HSG Laser Cutting Machine</h4><p>Double pallet system for uninterrupted, high-volume precision cutting</p></div></div>
+    <div class="infra-item"><div class="i-num">02</div><div><h4>200-Ton Hydraulic Press Brake</h4><p>Large-component bending with tight tolerances and repeatable accuracy</p></div></div>
+    <div class="infra-item"><div class="i-num">03</div><div><h4>MIG &amp; TIG Welding Stations</h4><p>8 dedicated welding bays with certified operators for all material types</p></div></div>
+    <div class="infra-item"><div class="i-num">04</div><div><h4>Overhead Crane &amp; Material Handling</h4><p>Heavy-lift capability for moving large assemblies safely across the facility</p></div></div>
+    <div class="infra-item"><div class="i-num">05</div><div><h4>Quality Inspection Area</h4><p>Dedicated QC zone with precision measurement instruments and test equipment</p></div></div>
+    <div class="infra-item"><div class="i-num">06</div><div><h4>Dedicated Assembly &amp; Fitting Area</h4><p>Spacious assembly bay for fitting and integrating large complex structures</p></div></div>
+    <div class="infra-item"><div class="i-num">07</div><div><h4>Design Office — CAD/CAM</h4><p>In-house engineering office with 3D CAD/CAM software and experienced design engineers</p></div></div>
+    <div class="infra-item"><div class="i-num">08</div><div><h4>CNC Machining Centre</h4><p>Precision CNC machining for tight-tolerance components and critical parts</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Common Questions</div>
+  <h2 class="section-title">Frequently Asked<br>Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">What is your maximum fabrication capacity? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">Our facility is capable of handling structures up to 6 tons in a single piece. For larger projects, we work in modular sections that are assembled on-site. Our 200-ton press brake and overhead crane give us significant capacity for heavy-duty work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer turnkey project delivery including on-site erection? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">Yes. Our turnkey solutions cover the complete project lifecycle — from initial design and engineering through fabrication, shop assembly, testing, delivery, and on-site commissioning. We are accountable for the entire scope.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What materials do you work with? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">We work with mild steel (MS), stainless steel (SS — all grades), carbon steel, and aluminium. For exotic alloys and special materials, please contact us to discuss feasibility.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are your welders certified? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">Yes — all 8 of our welders hold certifications per ASME/AWS standards for structural and pressure vessel welding. We maintain records of all welder qualifications and revalidate them as required.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can you fabricate food-grade and pharmaceutical-grade equipment? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">Absolutely. We regularly fabricate hygienic stainless steel equipment for dairy, food processing, and pharmaceutical applications — with full material traceability, electro-polishing options, and documentation packages.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is your typical lead time? 
+        <svg class="arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="faq-a">Lead times depend on project complexity and current workload. For standard fabrication items, we typically quote 2–4 weeks. For full turnkey projects, timelines are agreed upfront with milestone-based project management to ensure on-time delivery.</div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div>
+    <h2>Have More Questions?</h2>
+    <p>Speak directly with our engineering team — we're happy to discuss your specific requirements.</p>
+  </div>
+  <a href="contact.html" class="btn-white">Contact Us</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">BLAZE<span>-BEAM</span></div>
+      <p>Blaze-Beam Technology Pvt. Ltd. — Industrial fabrication, laser cutting, and turnkey engineering solutions. Maharashtra, India.</p>
+      <div class="tagline">Precision · Performance · Partnership</div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products &amp; Services</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Capabilities Sheet</a></li>
+        <li><a href="#">Quality Standards</a></li>
+        <li><a href="#">Facility Overview</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Us</h4>
+      <ul class="footer-contact">
+        <li><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Maharashtra, India</li>
+        <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +91 XXXXX XXXXX</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> info@blazebeamtech.com</li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> www.blazebeamtech.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Blaze-Beam Technology Pvt. Ltd. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>

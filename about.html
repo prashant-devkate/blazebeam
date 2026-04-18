@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Blaze-Beam Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Premium Corporate Palette */
+      --brand-orange: #E65C2B;
+      --brand-orange-hover: #CC4E20;
+      --navy-dark: #0B132B;
+      --navy-medium: #1C2541;
+      --slate-gray: #3A506B;
+      --light-bg: #F8F9FA;
+      --white: #FFFFFF;
+      --text-main: #2D3142;
+      --text-muted: #5C6B7A;
+      --border-color: #E2E8F0;
+      
+      /* Subtle Shadows */
+      --shadow-sm: 0 4px 6px -1px rgba(11, 19, 43, 0.05), 0 2px 4px -1px rgba(11, 19, 43, 0.03);
+      --shadow-md: 0 10px 30px -5px rgba(11, 19, 43, 0.08);
+      --shadow-lg: 0 20px 40px -10px rgba(11, 19, 43, 0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6, .brand-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--brand-orange);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 18px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .nav-logo .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--navy-dark);
+      line-height: 1;
+    }
+    .nav-logo .logo-text span { color: var(--brand-orange); }
+    .nav-logo .logo-sub {
+      font-size: 10px; color: var(--slate-gray);
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 4px; font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--brand-orange); }
+    
+    .nav-links .cta-link a {
+      background: var(--brand-orange);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-links .cta-link a:hover { 
+      background: var(--brand-orange-hover); 
+      transform: translateY(-1px);
+      color: white;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 160px 5% 100px;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.05;
+      background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-hero-content { position: relative; z-index: 2; }
+    .breadcrumb { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--brand-orange); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--white); }
+    .page-hero h1 { font-size: clamp(40px, 6vw, 64px); color: var(--white); line-height: 1.1; font-weight: 700; }
+    .page-hero h1 span { color: var(--brand-orange); }
+    .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 650px; line-height: 1.6; margin-top: 20px; }
+
+    /* ── GENERAL SECTIONS ── */
+    section { padding: 100px 5%; }
+    .section-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-orange); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--brand-orange); }
+    .section-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--navy-dark); line-height: 1.2; margin-bottom: 24px; }
+    .section-title.light { color: var(--white); }
+
+    /* ── ABOUT STORY ── */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-text p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+    
+    .story-visual { position: relative; }
+    .big-quote { 
+      font-family: 'Outfit', sans-serif; font-size: clamp(24px, 3vw, 36px); 
+      color: var(--navy-dark); line-height: 1.3; font-weight: 600;
+      border-left: 4px solid var(--brand-orange); padding-left: 24px; 
+    }
+    .promise-box {
+      margin-top: 32px; padding: 32px; background: var(--light-bg); 
+      border-radius: 8px; border: 1px solid var(--border-color);
+    }
+    .promise-box .p-title {
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; 
+      letter-spacing: 2px; text-transform: uppercase; color: var(--brand-orange); margin-bottom: 12px;
+    }
+    .promise-box p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin: 0;}
+
+    /* ── VISION MISSION ── */
+    .vm-section { background: var(--navy-dark); color: var(--white); }
+    .vm-section .section-label { color: var(--brand-orange); }
+    .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    
+    .vm-card { 
+      background: rgba(255,255,255,0.03); padding: 48px 40px; 
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; 
+      position: relative; overflow: hidden; transition: transform 0.3s ease;
+    }
+    .vm-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.05); border-color: rgba(230, 92, 43, 0.4); }
+    .vm-card::after { 
+      content: attr(data-label); position: absolute; font-family: 'Outfit', sans-serif; 
+      font-weight: 700; font-size: 100px; color: rgba(255,255,255,0.02); 
+      right: -10px; bottom: -20px; line-height: 1; pointer-events: none;
+    }
+    .vm-card h3 { 
+      font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 600; 
+      color: var(--white); margin-bottom: 16px;
+    }
+    .vm-card p { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8; position: relative; z-index: 1; }
+
+    /* ── TEAM ── */
+    .team-section { background: var(--light-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .team-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .team-stat { 
+      background: var(--white); padding: 40px 32px; text-align: center; 
+      border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .team-stat:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .team-stat .n { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 56px; color: var(--brand-orange); line-height: 1; margin-bottom: 8px; }
+    .team-stat .l { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--navy-dark); }
+
+    /* ── VALUES ── */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+    .value-card { 
+      padding: 40px 32px; background: var(--white); border-radius: 8px; 
+      border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); 
+      position: relative; overflow: hidden; transition: all 0.3s ease;
+    }
+    .value-card::before { 
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; 
+      background: var(--brand-orange); transform: scaleY(0); transform-origin: top; transition: transform 0.4s ease; 
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .value-card:hover::before { transform: scaleY(1); }
+    
+    .v-icon {
+      width: 48px; height: 48px; margin-bottom: 24px;
+      background: rgba(230, 92, 43, 0.1); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--brand-orange);
+    }
+    .v-icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    
+    .value-card h3 { font-size: 20px; font-weight: 600; color: var(--navy-dark); margin-bottom: 12px; }
+    .value-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── GROWTH ── */
+    .growth-section { background: var(--navy-dark); color: var(--white); }
+    .growth-section .section-label { color: var(--brand-orange); }
+    .growth-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 48px; }
+    .growth-item { 
+      display: flex; gap: 24px; padding: 32px; align-items: flex-start;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); 
+      border-radius: 8px; transition: background 0.3s;
+    }
+    .growth-item:hover { background: rgba(255,255,255,0.06); border-color: rgba(230, 92, 43, 0.4); }
+    
+    .g-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(230, 92, 43, 0.15); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: var(--brand-orange);
+    }
+    .g-icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .growth-item h4 { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .growth-item p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner { background: var(--brand-orange); padding: 80px 5%; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; position: relative; overflow: hidden; }
+    .cta-banner h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: white; margin-bottom: 8px; }
+    .cta-banner p { color: rgba(255,255,255,0.9); font-size: 18px; position: relative; z-index: 1; }
+    .btn-white { background: white; color: var(--brand-orange); padding: 16px 36px; border-radius: 4px; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; display: inline-block; position: relative; z-index: 1; transition: all 0.3s ease; box-shadow: var(--shadow-sm); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    /* ── FOOTER ── */
+    footer { background: #070B19; padding: 80px 5% 40px; color: rgba(255,255,255,0.7); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand .logo-text { font-size: 24px; font-weight: 700; color: white; margin-bottom: 16px; }
+    .footer-brand .logo-text span { color: var(--brand-orange); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 320px; }
+    .footer-brand .tagline { margin-top: 24px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-orange); }
+    footer h4 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 24px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 12px; }
+    footer ul li a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer ul li a:hover { color: var(--brand-orange); }
+    .footer-contact li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; margin-bottom: 16px; }
+    .footer-contact li svg { width: 18px; height: 18px; stroke: var(--brand-orange); stroke-width: 2; fill: none; flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom { padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 13px; }
+    .footer-bottom a { color: var(--brand-orange); text-decoration: none; }
+
+    /* ── MOBILE RESPONSIVENESS ── */
+    @media (max-width: 1024px) {
+      .story-grid, .vm-grid { grid-template-columns: 1fr; gap: 40px; }
+      .team-stats { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .growth-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .team-stats { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">BB</div>
+    <div>
+      <div class="logo-text">BLAZE<span>-BEAM</span></div>
+      <div class="logo-sub">Technology Pvt. Ltd.</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="applications.html">Applications</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li class="cta-link"><a href="contact.html#quote">Request Quote</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; About Us</div>
+    <h1>ABOUT<br><span>BLAZE-BEAM</span></h1>
+    <p>Founded on the principle that precision engineering and strong partnerships build the industries of tomorrow.</p>
+  </div>
+</div>
+
+<section>
+  <div class="story-grid">
+    <div class="story-text">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">Engineering Built<br>for Real Industry</h2>
+      <p>Blaze-Beam Technology Pvt. Ltd. was founded with a singular mission: to deliver industrial fabrication and engineering solutions that meet the highest quality standards while providing genuine value to every client we serve.</p>
+      <p>Based in Maharashtra, India, we have built our reputation on precision, reliability, and a client-first approach. From our in-house laser cutting and bending capabilities to our certified welding team and end-to-end project management, we are equipped to handle the most demanding industrial challenges.</p>
+      <p>Our team of 20+ skilled professionals, including 8 certified welders and dedicated design engineers, works collaboratively to ensure every project — from a single custom component to a complete turnkey plant — is delivered on time and to specification.</p>
+    </div>
+    <div class="story-visual">
+      <div class="big-quote">"We exist to redefine fabrication engineering by integrating advanced technologies with human ingenuity."</div>
+      <div class="promise-box">
+        <div class="p-title">Our Promise</div>
+        <p>Reliable, cost-effective, and future-ready solutions for every customer we serve — with code compliance, structural integrity, and transparent communication guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vm-section">
+  <div class="section-label">Our Direction</div>
+  <h2 class="section-title light">Vision &amp;<br>Mission</h2>
+  <div class="vm-grid">
+    <div class="vm-card" data-label="VISION">
+      <h3>Our Vision</h3>
+      <p>To lead the global transition towards smart, sustainable, and fully automated process industries by delivering next-generation engineering solutions. We aim to integrate Industry 4.0, IoT, AI-driven monitoring, and green energy practices to build plants that are efficient, reliable, and future-ready.</p>
+    </div>
+    <div class="vm-card" data-label="MISSION">
+      <h3>Our Mission</h3>
+      <p>We exist to redefine fabrication engineering by integrating advanced technologies with human ingenuity, ensuring reliable, cost-effective, and future-ready solutions for every customer we serve — delivered with precision, on time, and within budget.</p>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="section-label">Our Team</div>
+  <h2 class="section-title">Skilled People,<br>Great Results</h2>
+  <div class="team-stats">
+    <div class="team-stat"><div class="n">20+</div><div class="l">Skilled Professionals</div></div>
+    <div class="team-stat"><div class="n">8</div><div class="l">Certified Welders</div></div>
+    <div class="team-stat"><div class="n">2</div><div class="l">Machine Operators</div></div>
+    <div class="team-stat"><div class="n">1</div><div class="l">Laser Programmer</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Core Values</div>
+  <h2 class="section-title">What Drives<br>Everything We Do</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <h3>Precision</h3>
+      <p>Every cut, weld, and assembly is held to the highest dimensional standards. We don't accept "close enough" — only exact.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h3>Performance</h3>
+      <p>State-of-the-art machinery combined with experienced operators ensures consistent, high-performance output on every order.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Partnership</h3>
+      <p>We build long-term relationships, not transactional ones. Transparent communication and collaboration are at the heart of every project.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h3>Quality Assurance</h3>
+      <p>Rigorous quality control with international standards compliance — ISO processes, certified welders, full material traceability.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>On-Time Delivery</h3>
+      <p>Efficient processes and dedicated project management ensuring every project is completed and delivered on schedule.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1.5.54 2.8 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
+      </div>
+      <h3>Innovation</h3>
+      <p>Continually investing in new technology and capabilities to stay ahead — from robotic welding to Industry 4.0 integration.</p>
+    </div>
+  </div>
+</section>
+
+<section class="growth-section">
+  <div class="section-label">Looking Ahead</div>
+  <h2 class="section-title light">Growth &amp;<br>Expansion Plans</h2>
+  <div class="growth-grid">
+    <div class="growth-item">
+      <div class="g-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <h4>Workforce Expansion</h4>
+        <p>Scaling our team of skilled professionals to meet growing demand across industrial sectors in India and internationally.</p>
+      </div>
+    </div>
+    <div class="growth-item">
+      <div class="g-icon">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+      </div>
+      <div>
+        <h4>Technology Upgrades</h4>
+        <p>Investing in next-gen CNC, robotic welding, and advanced automation for higher throughput and tighter tolerances.</p>
+      </div>
+    </div>
+    <div class="growth-item">
+      <div class="g-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div>
+        <h4>Market Expansion</h4>
+        <p>Extending our reach to serve clients across India and international markets, starting with Southeast Asia and the Middle East.</p>
+      </div>
+    </div>
+    <div class="growth-item">
+      <div class="g-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      <div>
+        <h4>Strategic Partnerships</h4>
+        <p>Building collaborations with OEMs, EPC firms, and automation equipment manufacturers for long-term supply agreements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div>
+    <h2>Let's Build Together</h2>
+    <p>Partner with Blaze-Beam for precision, reliability, and engineering excellence.</p>
+  </div>
+  <a href="contact.html#quote" class="btn-white">Get in Touch</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">BLAZE<span>-BEAM</span></div>
+      <p>Blaze-Beam Technology Pvt. Ltd. — Industrial fabrication, laser cutting, and turnkey engineering solutions. Maharashtra, India.</p>
+      <div class="tagline">Precision · Performance · Partnership</div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products &amp; Services</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Vision &amp; Mission</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Growth Plans</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Us</h4>
+      <ul class="footer-contact">
+        <li><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Maharashtra, India</li>
+        <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +91 XXXXX XXXXX</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> info@blazebeamtech.com</li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> www.blazebeamtech.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Blaze-Beam Technology Pvt. Ltd. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
